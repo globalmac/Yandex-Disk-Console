@@ -16,7 +16,7 @@ logFile=yadisk.log
 mailLog=''
 
 # Send email error only
-mailLogErrorOnly=false
+mailLogErrorOnly=true
 
 # ---------- FUNCTIONS ------------
 
