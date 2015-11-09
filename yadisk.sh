@@ -5,8 +5,8 @@
 # Yandex.Disk token
 token=''
 
-# Target directory. Be sure, that the directory exists.
-# If you want to use only APP dir: backupDir='app:'
+# Target directory like: backupDir='/Myfiles/Backup'
+# If you want to use only APP dir like: backupDir='app:'
 backupDir='app:'
 
 # Logfile name
