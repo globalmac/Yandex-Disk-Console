@@ -101,11 +101,9 @@ function uploadFile
 	then
 	    logger "Yandex Disk error: $json_error"
         mailing "Yandex Disk backup error" "ERROR copy file $FILENAME. Yandex Disk error: $json_error"
-
 	else
 	    logger "Copying file to Yandex Disk success"
         mailing "Yandex Disk backup success" "SUCCESS copy file $FILENAME"
-
 	fi
     else
 	echo 'Some errors occured. Check log file for detail'
