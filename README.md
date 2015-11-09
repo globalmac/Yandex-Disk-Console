@@ -35,7 +35,7 @@ Callback URL: {https://oauth.yandex.ru/verification_code}
 
 #### 3. Получаем наш token.
 
-** Скопируйте ссылку и вставьте Ваш **ID**:
+Скопируйте ссылку и вставьте Ваш **ID**:
 
     https://oauth.yandex.ru/authorize?response_type=token&display=popup&client_id=ID
 
