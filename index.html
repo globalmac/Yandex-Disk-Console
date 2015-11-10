@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">Yandex-disk-console</h1>
-      <h2 class="project-tagline">Консольная утилита для создания бэкапов для Linux и Mac OS</h2>
+      <h2 class="project-tagline">Консольная утилита для создания бэкапов в Linux и Mac OS</h2>
       <a href="https://github.com/globalmac/Yandex-Disk-Console" class="btn">Посмотреть на GitHub</a>
       <a href="https://github.com/globalmac/Yandex-Disk-Console/zipball/master" class="btn">Скачать архив .zip</a>
       <a href="https://github.com/globalmac/Yandex-Disk-Console/tarball/master" class="btn">Скачать архив .tar.gz</a>
@@ -23,6 +23,21 @@
 <a id="yandex-disk-console" class="anchor" href="#yandex-disk-console" aria-hidden="true"><span class="octicon octicon-link"></span></a>Yandex-Disk-Console</h1>
 
 <p>Консольная утилита для создания бэкапов в Linux и Mac OS.</p>
+
+<h2>
+<a id="Использование" class="anchor" href="#%D0%98%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Использование</h2>
+
+<p>Загрузить файл на Яндекс Диск:</p>
+
+<div class="highlight highlight-source-shell"><pre>./yadisk.sh -f /path/to/file/file_name</pre></div>
+
+<p>Загрузить файл на Яндекс Диск и отправить email о результате</p>
+
+<div class="highlight highlight-source-shell"><pre>./yadisk.sh -f /path/to/file/file_name -m user@localhost -e</pre></div>
+
+<p><strong>После первой загрузки, если Вы выбрали для себя 1 вариант с загрузкой файлов в отдельную папку (например: "Приложения/Backup"), зайдите в свой Яндекс Диск и Вы увидите новую папку "Приложения", в ней Вы найдете папку вашего приложения и сможете проверить результат.</strong></p>
+
+
 
 <h2>
 <a id="Установка" class="anchor" href="#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>Установка</h2>
@@ -69,19 +84,6 @@
 <p>Нажмите кнопку "Разрешить", чтобы приложение получило доступ к вашим данным на Яндекс Диске.</p>
 
 <p>В центре экрана будет тот самый <strong>token</strong>: скопируйте его, откройте файл <strong>yadisk.sh</strong> и вставьте в параметре <strong>token</strong>.</p>
-
-<h2>
-<a id="Использование" class="anchor" href="#%D0%98%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Использование</h2>
-
-<p>Загрузить файл:</p>
-
-<div class="highlight highlight-source-shell"><pre>./yadisk.sh -f /path/to/file/file_name</pre></div>
-
-<p>Загрузить файл и отправить email в случае ошибки</p>
-
-<div class="highlight highlight-source-shell"><pre>./yadisk.sh -f /path/to/file/file_name -m user@localhost -e</pre></div>
-
-<p><strong>После первой загрузки, если Вы выбрали для себя 1 вариант с загрузкой файлов в отдельную папку (например: "Приложения/Backup"), зайдите в свой Яндекс Диск и Вы увидите новую папку "Приложения", в ней Вы найдете папку вашего приложения и сможете проверить результат.</strong></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/globalmac/Yandex-Disk-Console">Yandex-disk-console</a> is maintained by <a href="https://github.com/globalmac">globalmac</a>.</span>
