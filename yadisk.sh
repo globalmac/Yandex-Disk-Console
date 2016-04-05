@@ -3,7 +3,7 @@
 # ---------- SETTINGS -------------
 
 # Yandex.Disk token
-token='dd76bfdc4357420892f6cd1669e7d86e'
+token='123'
 
 # Target directory like: backupDir='/Myfiles/Backup'
 # If you want to use only APP dir like: backupDir='app:'
@@ -13,7 +13,7 @@ backupDir='app:'
 logFile=yadisk.log
 
 # Send log to email
-mailLog='admin@globalmac.ru'
+mailLog='mail'
 
 # Send email error only
 mailLogErrorOnly=false
