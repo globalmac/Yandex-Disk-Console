@@ -1,9 +1,9 @@
-#!/bin/bash
+!/bin/bash
 
 # ---------- SETTINGS -------------
 
 # Yandex.Disk token
-token=''
+token='dd76bfdc4357420892f6cd1669e7d86e'
 
 # Target directory like: backupDir='/Myfiles/Backup'
 # If you want to use only APP dir like: backupDir='app:'
@@ -13,10 +13,10 @@ backupDir='app:'
 logFile=yadisk.log
 
 # Send log to email
-mailLog=''
+mailLog='admin@globalmac.ru'
 
 # Send email error only
-mailLogErrorOnly=true
+mailLogErrorOnly=false
 
 # ---------- FUNCTIONS ------------
 
@@ -74,16 +74,16 @@ function getUploadUrl()
     local output
     local json_out
     local json_error
-    json_out=`curl -s -H "Authorization: OAuth $token" https://cloud-api.yandex.net:443/v1/disk/resources/upload/?path=$backupDir/$backupName&overwrite=true`
+    json_out=`curl -s -H "Authorization: OAuth $token" https://cloud-api.yandex.net:443/v1/disk/resources/upload/?path=$
     json_error=$(checkError "$json_out")
     if [[ $json_error != '' ]];
     then
-	    logger "Yandex Disk error: $json_error"
+            logger "Yandex Disk error: $json_error"
         mailing "Yandex Disk backup error" "ERROR copy file $FILENAME. Yandex Disk error: $json_error"
         exit 1
     else
-	    output=$(parseJson 'href' $json_out)
-	    echo $output
+            output=$(parseJson 'href' $json_out)
+            echo $output
     fi
 }
 
@@ -95,60 +95,64 @@ function uploadFile
     uploadUrl=$(getUploadUrl)
     if [[ $uploadUrl != '' ]];
     then
-	    json_out=`curl -s -T $1 -H "Authorization: OAuth $token" $uploadUrl`
-	    json_error=$(checkError "$json_out")
-	if [[ $json_error != '' ]];
-	then
-	    logger "Yandex Disk error: $json_error"
+            json_out=`curl -s -T $1 -H "Authorization: OAuth $token" $uploadUrl`
+            json_error=$(checkError "$json_out")
+        if [[ $json_error != '' ]];
+        then
+            logger "Yandex Disk error: $json_error"
         mailing "Yandex Disk backup error" "ERROR copy file $FILENAME. Yandex Disk error: $json_error"
-	else
-	    logger "Copying file to Yandex Disk success"
+        else
+            logger "Copying file to Yandex Disk success"
         mailing "Yandex Disk backup success" "SUCCESS copy file $FILENAME"
-	fi
+        fi
     else
-	echo 'Some errors occured. Check log file for detail'
-	    exit 1
+        echo 'Some errors occured. Check log file for detail'
+            exit 1
     fi
 }
 
 function preUpload()
 {
-    backupName=`date "+%Y-%m-%d_%H-%M"`_$(basename $FILENAME)
+    backupName=`date "+%Y-%m-%d"`_$(basename $FILENAME)
 }
 
 # --------------- OPTIONS -------------
 
-while getopts ":f:g:m:he" opt; do
+while getopts ":f:y:g:m:he" opt; do
     case $opt in
-	h)
-	    usage
-	    exit 1
-	    ;;
-	f)
-	    FILENAME=$OPTARG
+        h)
+            usage
+            exit 1
+            ;;
+        y)
+            CustomFolder=$OPTARG
+            backupDir="app:/$CustomFolder"
+            ;;
+        f)
+            FILENAME=$OPTARG
 
-	    if [ ! -f $FILENAME ];
-	    then
-		    echo "File not found: $FILENAME"
-		    logger "File not found"
+            if [ ! -f $FILENAME ];
+            then
+                    echo "File not found: $FILENAME"
+                    logger "File not found"
             mailing "Yandex Disk backup error" "ERROR copy file $FILENAME. File not found."
-		    exit 1
-	    fi
-	    ;;
-	e)
-	    mailLogErrorOnly=true
-	    ;;
-    m)
+                    exit 1
+            fi
+            ;;
+        e)
+            mailLogErrorOnly=true
+            ;;
+		m)
         mailLog=$OPTARG
         ;;
-	\?)
-	    echo "Invalid option: -$OPTARG. $0 -h for help" >&2
-	    exit 1
-	    ;;
-	:)
-	    echo "Option -$OPTARG requires an argument." >&2
-	    exit 1
-	    ;;
+        \?)
+            echo "Invalid option: -$OPTARG. $0 -h for help" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
     esac
 done
 
@@ -163,4 +167,3 @@ fi
 preUpload
 
 uploadFile $FILENAME
-
