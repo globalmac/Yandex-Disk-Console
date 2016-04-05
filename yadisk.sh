@@ -1,9 +1,10 @@
-!/bin/bash
+
+#!/bin/bash
 
 # ---------- SETTINGS -------------
 
 # Yandex.Disk token
-token='123'
+token='TOKEN'
 
 # Target directory like: backupDir='/Myfiles/Backup'
 # If you want to use only APP dir like: backupDir='app:'
@@ -13,7 +14,7 @@ backupDir='app:'
 logFile=yadisk.log
 
 # Send log to email
-mailLog='mail'
+mailLog=''
 
 # Send email error only
 mailLogErrorOnly=false
@@ -31,6 +32,7 @@ OPTIONS:
   -e  Send mail on error only
 EOF
 }
+
 
 function mailing()
 {
@@ -74,7 +76,7 @@ function getUploadUrl()
     local output
     local json_out
     local json_error
-    json_out=`curl -s -H "Authorization: OAuth $token" https://cloud-api.yandex.net:443/v1/disk/resources/upload/?path=$
+    json_out=`curl -s -H "Authorization: OAuth $token" https://cloud-api.yandex.net:443/v1/disk/resources/upload/?path=$backupDir/$backupName&overwrite=true`
     json_error=$(checkError "$json_out")
     if [[ $json_error != '' ]];
     then
@@ -143,7 +145,7 @@ while getopts ":f:y:g:m:he" opt; do
             mailLogErrorOnly=true
             ;;
 		m)
-        mailLog=$OPTARG
+            mailLog=$OPTARG
         ;;
         \?)
             echo "Invalid option: -$OPTARG. $0 -h for help" >&2
